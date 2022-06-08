@@ -54,11 +54,11 @@ class AdminLogin extends Controller
             'password'=>Hash::make($fields['password'])
         ]);
 
-        $token=$manager->createToken('myapptoken')->plainTextToken;
+/*         $token=$manager->createToken('myapptoken')->plainTextToken; */
 
         $response=[
-            'manager'=>$manager,
-            'token'=>$token
+            'message'=>'manager created successfully'
+
         ];
 
         return response()->json($response, 200);
@@ -73,6 +73,14 @@ class AdminLogin extends Controller
 
         return [
             'message'=>'logged out'
+        ];
+    }
+
+    public function deleteManager(Request $request){
+        Manager::destroy($request->id);
+
+        return [
+            'message'=>'manager deleted'
         ];
     }
 }

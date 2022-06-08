@@ -15,10 +15,6 @@ use App\Http\Controllers\AdminLogin;
 |
 */
 
-/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
- */
 
  //public routes
  Route::get('adminlogin',[AdminLogin::class,'login']);
@@ -28,6 +24,7 @@ use App\Http\Controllers\AdminLogin;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('addmanager',[AdminLogin::class,'registerManager']);
     Route::post('adminlogout',[AdminLogin::class,'logout']);
+    Route::post('deletemanagers',[AdminLogin::class,'deleteManager']);
 });
 
 
