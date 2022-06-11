@@ -8,14 +8,15 @@ use App\Models\Manager;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 
-
-class AdminLogin extends Controller
+class AdminController extends Controller
 {
-    public function login(){
-        return ['message'=>'admin login form will be here'];
-    }
-
-    public function protected_login(Request $request){
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $fields=$request->validate([
             'email'=>'required|email|string',
             'password'=>'required|min:8'
@@ -28,7 +29,7 @@ class AdminLogin extends Controller
                 'message'=>'Incorrect email or password'
             ],401);
         }else{
-            $token=$admin->createToken('admintoken')->plainTextToken;
+            $token=$admin->createToken('myapptoken')->plainTextToken;
 
             $response=[
                 'admin'=>$admin,
@@ -36,14 +37,20 @@ class AdminLogin extends Controller
             ];
 
              return response()->json($response, 200);
-        }
+        } 
     }
 
-    public function registerManager(Request $request){
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $fields=$request->validate([
             'name'=>'required|string',
-            'email'=>'required|string|unique:managers|email',
+            'email'=>'required|string|unique:managers,email',
             'password'=>'required|min:8|string|confirmed'
 
         ]);
@@ -64,19 +71,37 @@ class AdminLogin extends Controller
         return response()->json($response, 200);
     }
 
-    public function logout(Request $request){
-        $id=$request->id;
-        $tokenId=$request->tokenid;
-        $admin=Admin::find($id)->first();
-
-        $admin->tokens()->where('id',$tokenId)->delete();
-
-        return [
-            'message'=>'logged out'
-        ];
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
-    public function deleteManager(Request $request){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
         Manager::destroy($request->id);
 
         return [
