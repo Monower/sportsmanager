@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLogin;
+use App\Http\Controllers\ManagerPlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use App\Http\Controllers\AdminLogin;
  //public routes
  Route::get('adminlogin',[AdminLogin::class,'login']);
  Route::post('adminlogin',[AdminLogin::class,'protected_login']);
+ Route::post('request',[ManagerPlayerController::class,'applicants']);
 
  //protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
