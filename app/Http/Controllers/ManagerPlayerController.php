@@ -20,7 +20,8 @@ class ManagerPlayerController extends Controller
             'number_of_players'=>'required|numeric',
             'name_of_game'=>'required|string',
             'country'=>'required|string',
-            'logo'=>'required|mimes:jpeg,png|max:2048'
+            'logo'=>'required|mimes:jpeg,png|max:2048',
+            'star_player'=>'required'
         ]);
 
         $newImgName= time().'-'.$request->name.'.'.$request->logo->extension();
@@ -31,12 +32,14 @@ class ManagerPlayerController extends Controller
         TempManagerPlayer::create([
             'name'=>$request->name,
             'email'=>$request->email,
+            'phone'=>$request->phone,
             'type'=>$request->type,
             'team_name'=>$request->team_name,
             'number_of_players'=>$request->number_of_players,
             'name_of_game'=>$request->name_of_game,
             'country'=>$request->country,
-            'logo'=>$newImgName
+            'logo'=>$newImgName,
+            'star_player'=>$request->star_player
         ]);
 
         $response=[
