@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\GameNameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,13 @@ use App\Http\Controllers\TournamentController;
     Route::get('tournamentlogin',[TournamentController::class,'index']);
     Route::post('tournamentlogin',[TournamentController::class,'login']);
     Route::get('tournamentdash',[TournamentController::class,'tournamentDash'])->name('tournamentdash');
+    Route::post('addtournament',[TournamentController::class,'add']);
+    Route::post('updatetournament',[TournamentController::class,'update']);
+    Route::get('deletetournament/{id}',[TournamentController::class,'delete']);
+
+    Route::post('addgame',[GameNameController::class,'add']);
+    Route::post('updategame',[GameNameController::class,'update']);
+    Route::post('deletegame/{id}',[GameNameController::class,'delete']);
  });
 
 

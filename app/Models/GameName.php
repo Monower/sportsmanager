@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TournamentName extends Model
+class GameName extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'name',
-        'details'
+        'name_of_game'
     ];
-
-    public function game_names(){
-        return $this->hasMany(GameName::class);
-    }
 }
