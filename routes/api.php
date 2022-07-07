@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\GameNameController;
+use App\Http\Controllers\TeamNameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,11 @@ use App\Http\Controllers\GameNameController;
     Route::post('addgame',[GameNameController::class,'add']);
     Route::post('updategame',[GameNameController::class,'update']);
     Route::post('deletegame/{id}',[GameNameController::class,'delete']);
+ });
+
+
+ Route::prefix('team')->group(function(){
+    Route::post('register',[TeamNameController::class,'register']);
  });
 
 
