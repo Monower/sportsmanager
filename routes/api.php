@@ -39,6 +39,7 @@ use App\Http\Controllers\TeamNameController;
  Route::prefix('admin')->group(function(){
     Route::get('login',[AdminController::class,'login']);
     Route::post('login',[AdminController::class,'addAdmin']);
+    Route::post('admin-login',[AdminController::class,'admin_login']);
     Route::get('adminupdate',[AdminController::class,'edit']);
     Route::post('adminupdate',[AdminController::class,'update']);
     Route::get('deleteadmin/{id}',[AdminController::class,'delete']);

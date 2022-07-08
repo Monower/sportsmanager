@@ -75,5 +75,21 @@ class AdminController extends Controller
         
     }
 
+    public function admin_login(Request $request){
+
+        $request->validate([
+            'email'=>'required',
+            'password'=>'required'
+        ]);
+
+        $email= Admin::where('email','=',$request->email)->first();
+
+        if(Hash::check($request->password, $email->password)){
+            return redirect(route('tournamentdash'));
+        }else{
+            return ['message'=>'creds dont match'];
+        }
+    }
+
     
 }
