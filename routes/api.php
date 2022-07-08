@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\GameNameController;
+use App\Http\Controllers\TeamMemberInfoController;
 use App\Http\Controllers\TeamNameController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,7 @@ use App\Http\Controllers\TeamNameController;
 
  Route::prefix('team')->group(function(){
     Route::post('register',[TeamNameController::class,'register']);
+    Route::post('add-member',[TeamMemberInfoController::class,'add_member']);
  });
 
 

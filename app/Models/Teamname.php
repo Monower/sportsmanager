@@ -17,4 +17,8 @@ class Teamname extends Model
         'password',
         'game_name_id '
     ];
+
+    public function team_member_info(){
+        return $this->hasMany(TeamMemberInfo::class,'team_name_id');
+    }
 }

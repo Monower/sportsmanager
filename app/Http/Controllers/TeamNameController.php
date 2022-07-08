@@ -21,30 +21,41 @@ class TeamNameController extends Controller
             'game_name_id'=>'required'
         ]);
 
-        $id=GameName::find($request->gmae_name_id);
 
-        dd($id->name_of_game);
+        $id=GameName::find($request->game_name_id);
+
 
         if($id != null){
-            $newfilename= time().'-'.$request->team_name.'.'.$request->logo->extension();
-            Storage::disk('public')->put($newfilename, file_get_contents($request->file('logo')));
-    
-            
-            $message=$id->team_name()->create([
-                'team_name'=>$request->team_name,
-                'name_of_manager'=>$request->name_of_manager,
-                'number_of_player'=>$request->number_of_player,
-                'logo'=>$newfilename,
-                'password'=>Hash::make($request->password),
-                'game_name_id'=>$request->game_name_id
-            ]);
-    
-    
-            if($message){
-                return ['message'=>'registered successfully'];
+
+
+            $team_name= Teamname::where('name_of_manager','=',$request->name_of_manager)
+                                ->where('game_name_id','=',$request->game_name_id)
+                                ->first();
+
+            if(isset($team_name)){
+                return ['message'=>'you can register in a game only once'];
             }else{
-                return ['message'=>'not registered successfully'];
+                $newfilename= time().'-'.$request->team_name.'.'.$request->logo->extension();
+                Storage::disk('public')->put($newfilename, file_get_contents($request->file('logo')));
+        
+                
+                $message=$id->team_name()->create([
+                    'team_name'=>$request->team_name,
+                    'name_of_manager'=>$request->name_of_manager,
+                    'number_of_player'=>$request->number_of_player,
+                    'logo'=>$newfilename,
+                    'password'=>Hash::make($request->password),
+                    'game_name_id'=>$request->game_name_id
+                ]);
+        
+        
+                if($message){
+                    return ['message'=>'registered successfully'];
+                }else{
+                    return ['message'=>'not registered successfully'];
+                }
             }
+
         }else{
             return ['message'=>'wrong game id'];
         }
